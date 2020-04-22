@@ -36,10 +36,13 @@ func Start(addr string) {
 			res := getJson()
 
 			term := terminal.NewTerminal(s, res.Get("hostname").MustString())
-			line := ""
 			for {
-				line, _ = term.ReadLine()
+				line, err := term.ReadLine()
 				if line == "exit" {
+					break
+				}
+
+				if err != nil {
 					break
 				}
 
